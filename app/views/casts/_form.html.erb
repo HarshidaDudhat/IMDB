@@ -1,0 +1,41 @@
+<%= form_with model: @cast, local: true do |form| %>
+ 
+    <% if @cast.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@cast.errors.count, "error") %> prohibited
+          this cast from being saved:
+        </h2>
+        <ul>
+          <% @cast.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+   
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+   
+    <p>
+      <%= form.label :date_of_birth %><br>
+      <%= form.text_field :date_of_birth %>
+    </p>
+
+    <p>
+      <%= form.label :no_of_movies %><br>
+      <%= form.text_field :no_of_movies %>
+    </p>
+   
+    <p>
+      <%= form.label :rank %><br>
+      <%= form.text_field :rank %>
+    </p>
+   
+    <p>
+      <%= form.submit %>
+    </p>
+   
+  <% end %>

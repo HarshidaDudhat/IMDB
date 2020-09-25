@@ -1,41 +1,80 @@
 <%= form_with model: @movie, local: true do |form| %>
  
-    <% if @movie.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@movie.errors.count, "error") %> prohibited
-          this movie from being saved:
-        </h2>
-        <ul>
-          <% @movie.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-   
-    <p>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-    </p>
-   
-    <p>
-      <%= form.label :ratings %><br>
-      <%= form.text_field :ratings %><br>
-    </p>
-
-    <p>
-      <%= form.label :release_date %><br>
-      <%= form.text_field :release_date %>
-    </p>
-   
-    <p>
-      <%= form.label :rank %><br>
-      <%= form.text_field :rank %>
-    </p>
-   
-    <p>
-      <%= form.submit %>
-    </p>
-   
+  <% if @movie.errors.any? %>
+   <div id="error_explanation">
+    <h2>
+     <%= pluralize(@movie.errors.count, "error") %> prohibited
+     this movie from being saved:
+    </h2>
+    <ul>
+     <% @movie.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+     <% end %>
+    </ul>
+   </div>
   <% end %>
+  
+  <p>
+   <%= form.label :name %><br>
+   <%= form.text_field :name %>
+  </p>
+  
+  <p>
+   <%= form.label :ratings %><br>
+   <%= form.text_field :ratings %><br>
+  </p>
+
+  <p>
+   <%= form.label :release_date %><br>
+   <%= form.text_field :release_date %>
+  </p>
+
+  <p>
+  <table>
+    <%= form.label :Genres %><br>
+      <% @genres.each do |genre| %>
+       <tr><td>
+       <input type = "checkbox" value = <%= genre.id %> name = "genre_ids[]" >
+       <label for = "genre_ids[]" > <%= genre.name %> </label>
+       </td></tr>
+    <% end %>
+  </table>
+
+  </p>
+
+  <p>
+  <table>
+    <%= form.label :Actors %><br>
+      <% @casts.each do |cast| %>
+       <tr><td>
+       <input type = "checkbox" value = <%= cast.id %> name = "actor_ids[]" >
+       <label for = "actor_ids[]" > <%= cast.name %> </label>
+       </td></tr>
+    <% end %>
+  </table>
+
+  </p>
+  
+<p>
+  <table>
+    <%= form.label :Directors %><br>
+      <% @casts.each do |cast| %>
+       <tr><td>
+       <input type = "checkbox" value = <%= cast.id %> name = "director_ids[]" >
+       <label for = "director_ids[]" > <%= cast.name %> </label>
+       </td></tr>
+    <% end %>
+  </table>
+
+</p>
+
+  <p>
+   <%= form.label :rank %><br>
+   <%= form.text_field :rank %>
+  </p>
+  
+  <p>
+   <%= form.submit %>
+  </p>
+  
+ <% end %>

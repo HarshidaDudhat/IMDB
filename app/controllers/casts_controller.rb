@@ -8,31 +8,36 @@ class CastsController < ApplicationController
 
 	def new
 		@cast = Cast.new
+		@movies = Movie.all
 	end
 
 	def create
-		@cast = Cast.create(cast_params)
-		redirect_to @cast
-    end
+		@cast = Cast.new(cast_params)
+        if @cast.save
+            @cast.update_movies(params[:movie_ids])
+            redirect_to @cast
+        else
+            render 'new'
+        end
+  end
 
 	def show
+		@cast = Cast.find(params[:id])
 		@movies_acted = @cast.movies_acted
 		@movies_directed = @cast.movies_directed
 	end
 
+	def edit
+		@cast = Cast.find(params[:id])
+		@movies = Movie.all
+	end
+	
 	def update
-    	respond_to do |format|
-      		if @cast.update(cast_params)
-        		format.html { redirect_to @cast, notice: 'cast was successfully updated.' }
-        		format.json { render :show, status: :ok, location: @cast }
-      		else
-       			format.html { render :edit }
-        		format.json { render json: @cast.errors, status: :unprocessable_entity }
-      		end
-    	end
-    end
+		@cast = Cast.find(params[:id])
+  	redirect_to @cast
+	end
 
-    def destroy
+  def destroy
     @cast.destroy
       respond_to do |format|
       format.html { redirect_to casts_url, notice: 'Topic was successfully destroyed.' }
@@ -47,6 +52,6 @@ class CastsController < ApplicationController
     end
 
     def cast_params
-    	params.require(:cast).permit(:name, :date_of_birth, :no_of_movies, :rank)
+    	params.require(:cast).permit(:name, :date_of_birth, :no_of_movies, :rank, :movie_ids)
 	end	
 end

@@ -1,0 +1,20 @@
+Name: <%= @genre.name %><br/>
+
+<p>
+	<strong> Movies </strong>
+	<% @genre.genre_movies.pluck(:movie_id).each do |id| %>
+	<%= link_to Movie.find(id).name, Movie.find(id) %>
+	
+	<% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_genre_path(@genre)  %>
+<%= link_to 'Back', genres_path %>
+
+
+<br>
+<br>
+
+
+

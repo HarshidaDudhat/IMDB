@@ -9,4 +9,6 @@ class Cast < ApplicationRecord
 	has_many :movies_directed, through: :director_movies, source: :cast
 	has_many :movies_acted, through: :actor_movies, source: :cast
 
+
+
 end

@@ -6,16 +6,19 @@ Rank : <%= @cast.rank %><br/>
 <br>
 
 <h2>Movies Acted</h2>
-<% @movies_acted.each do |movie| %>
-	<%= link_to movie.name, movie %>
+<% @cast.actor_movies.pluck(:movie_id).each do |id| %>
+	<%= link_to Movie.find(id).name, Movie.find(id) %>
 	<br>
 <% end %>
+<br>
 
-<h2>Actors</h2>
-<% @movies_directed.each do |movie| %>
-	<%= link_to movie.name, movie %>
+<h2>Movies Directed</h2>
+<% @cast.director_movies.pluck(:movie_id).each do |id| %>
+	<%= link_to Movie.find(id).name, Movie.find(id) %>
 	<br>
 <% end %>
+<br>
+
 
 <%= link_to 'Edit', edit_cast_path(@cast)  %>
 <%= link_to 'Back', casts_path %>

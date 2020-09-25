@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_083238) do
+ActiveRecord::Schema.define(version: 2020_09_24_101758) do
 
   create_table "actor_movies", force: :cascade do |t|
     t.integer "cast_id"
     t.integer "movie_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["cast_id", "movie_id"], name: "index_actor_movies_on_cast_id_and_movie_id", unique: true
   end
 
   create_table "casts", force: :cascade do |t|
@@ -26,13 +27,26 @@ ActiveRecord::Schema.define(version: 2020_09_22_083238) do
     t.integer "rank"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "slug"
-    t.index ["slug"], name: "index_casts_on_slug", unique: true
   end
 
   create_table "director_movies", force: :cascade do |t|
     t.integer "cast_id"
     t.integer "movie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cast_id", "movie_id"], name: "index_director_movies_on_cast_id_and_movie_id", unique: true
+  end
+
+  create_table "genre_movies", force: :cascade do |t|
+    t.integer "genre_id"
+    t.integer "movie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id", "movie_id"], name: "index_genre_movies_on_genre_id_and_movie_id", unique: true
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -44,8 +58,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_083238) do
     t.integer "rank"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "slug"
-    t.index ["slug"], name: "index_movies_on_slug", unique: true
   end
 
 end
